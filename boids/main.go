@@ -53,6 +53,13 @@ func (g *Game) Layout(_, _ int) (w, h int) {
 }
 
 func main() {
+	for i, row := range boidMap {
+		for j := range row {
+			boidMap[i][j] = -1
+			// -1 indicates there's no boid there
+		}
+	}
+
 	for i := 0; i < boidCount; i++ {
 		createBoid(i)
 	}

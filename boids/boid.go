@@ -14,7 +14,11 @@ type Boid struct {
 // making boids move acc to velocity
 // next determined where the boid is, inside frame or passed it
 func (b *Boid) moveOne() {
+	boidMap[int(b.postion.x)][int(b.postion.y)] = -1
+
 	b.postion = b.postion.Add(b.velocity)
+	boidMap[int(b.postion.x)][int(b.postion.y)] = b.id
+
 	next := b.postion.Add(b.velocity)
 	if next.x >= screenWidth || next.x < 0 {
 		b.velocity = Vector2d{-b.velocity.x, b.velocity.y} // changes the velocity, creates a bouncy effect upon striking the edge for x  axis
@@ -38,6 +42,7 @@ func createBoid(bid int) {
 		id:       bid,
 	}
 	boids[bid] = &b
+	boidMap[int(b.postion.x)][int(b.postion.y)] = b.id
 	go b.start()
 }
 
