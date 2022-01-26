@@ -1,6 +1,7 @@
 package main
 
 import (
+	"math"
 	"math/rand"
 	"time"
 )
@@ -12,7 +13,28 @@ type Boid struct {
 }
 
 func (b *Boid) calcAcceleration() Vector2d {
+	upper, lower := b.postion.AddV(viewRadius), b.postion.AddV(-viewRadius)
+	avgVelocity := Vector2d{0, 0}
+	count := 0.0
+
+	// these 2 loops simply iterate to every single viewBox we have
+	for i := math.Max(lower.x, 0); i <= math.Min(upper.x, screenWidth); i++ {
+		for j := math.Max(lower.y, 0); j <= math.Min(upper.y, screenHeight); j++ {
+			if otherBoidId := boidMap[int(i)][int(j)]; otherBoidId != -1 && otherBoidId != b.id {
+				if dist := boids[otherBoidId].postion.Distance(b.postion); dist < viewRadius {
+					count++
+					avgVelocity = avgVelocity.Add(boids[otherBoidId].velocity)
+				}
+			}
+		}
+	}
+
 	accel := Vector2d{0, 0}
+	if count > 0 {
+		avgVelocity = avgVelocity.DivisionV(count)
+		accel = avgVelocity.Substract(b.velocity).MultiplyV(adjRate)
+	}
+
 	return accel
 }
 
