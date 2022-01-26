@@ -11,9 +11,15 @@ type Boid struct {
 	id       int
 }
 
+func (b *Boid) calcAcceleration() Vector2d {
+	accel := Vector2d{0, 0}
+	return accel
+}
+
 // making boids move acc to velocity
 // next determined where the boid is, inside frame or passed it
 func (b *Boid) moveOne() {
+	b.velocity = b.velocity.Add(b.calcAcceleration()).limit(-1, 1) // lower and upper inside (-1, 1)
 	boidMap[int(b.postion.x)][int(b.postion.y)] = -1
 
 	b.postion = b.postion.Add(b.velocity)
