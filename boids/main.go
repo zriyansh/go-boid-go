@@ -3,6 +3,7 @@ package main
 import (
 	"image/color"
 	"log"
+	"sync"
 
 	"github.com/hajimehoshi/ebiten/v2"
 )
@@ -25,7 +26,7 @@ var (
 	boidMap [screenWidth + 1][screenHeight + 1]int
 	// this will be memory shared b/w threads, also store boid id,
 	// used to communicate b/w boid relative postion
-
+	rWlock = sync.RWMutex{}
 )
 
 type Game struct {
