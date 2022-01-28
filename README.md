@@ -92,7 +92,9 @@ Then we introduce a bounce mechanism that mimics real life birds when they see a
 <img width="604" src="https://user-images.githubusercontent.com/52788043/151524569-4905cec5-1646-4c01-8ac8-42f3285619ec.png">
 
 
+# How to run this simulation in your system 
 
+This is fairly simple codebase with 
 
 
 
