@@ -94,7 +94,16 @@ Then we introduce a bounce mechanism that mimics real life birds when they see a
 
 # How to run this simulation in your system 
 
-This is fairly simple codebase with 
+This is fairly simple codebase with 3 .go files inside the ./boids directory where the simulation lives. 
+
+The sync dir is just an example code to demonstrate race condition. 
+
+## Steps
+1. Clone this repository or download it as a zip file and unzip it. 
+2. Open the folder in your editor OR cd to the root project folder using terminal.
+3. ```cd boids/```
+4. ```go run *.go``` OR ```go run .```
+5. That's all, a terminal or exe window should popup with the simulation.  
 
 
 
